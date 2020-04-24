@@ -1,38 +1,22 @@
 const durationInput = document.querySelector('#duration'),
     startButton = document.querySelector('#start'),
-    pauseButton = document.querySelector('#pause')
+    pauseButton = document.querySelector('#pause'),
+    circle = document.querySelector('circle');
 
-class Timer {
-    constructor(durationInput, startButton, pauseButton) {
-        this.durationInput = durationInput;
-        this.startButton = startButton;
-        this.pauseButton = pauseButton;
+const perimeter = circle.getAttribute('r') * 2 * Math.PI;
+circle.setAttribute('stroke-dasharray', perimeter)
 
-        this.startButton.addEventListener('click', this.start);
-        this.pauseButton.addEventListener('click', this.pause);
+let currentOffset = 0;
+
+const t1 = new Timer(durationInput, startButton, pauseButton, {
+    onStart() {
+        console.log('timer started')
+    },
+    onTick() {
+        currentOffset = currentOffset - 1;
+        circle.setAttribute('stroke-dashoffset', currentOffset)
+    }, 
+    onComplete() {
+        console.log('timer completed')
     }
-    
-    start = () => {
-        this.tick();
-        this.interval = setInterval(this.tick, 1000)
-    }
-
-    pause = () => {
-        clearInterval(this.interval)
-    }
-
-    tick = () => {
-        // this.timeRemaining when we're assigning a value to it is get timeRemaining(), this.timeRemaining when were setting it to a vause is the same as set timeRemaining
-        this.timeRemaining = timeRemaining - 1;
-    }
-
-    get timeRemaining(){
-        return parseFloat(this.durationInput.value)
-    }
-
-    set timeRemaining(time){
-        this.durationInput.value = time;
-    }
-}
-
-const t1 = new Timer(durationInput, startButton, pauseButton)
+})
