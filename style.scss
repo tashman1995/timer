@@ -1,0 +1,46 @@
+$bg-1: rgb(13, 32, 61);
+$bg-2: rgb(26, 61, 112);
+
+* {
+    margin: 0;
+    padding: 0;
+    
+}
+
+*,
+::after,
+::before {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; //1rem is 10px
+}
+
+body {
+    font-family: 'Open sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    background-image: linear-gradient(to right bottom, $bg-1, $bg-2);
+    color: #fff;
+    min-height: 100vh;
+  
+}
+
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    
+    margin: 0rem auto 8rem auto;
+    padding: 3rem;
+
+    width: 118rem;
+
+}
+
+.line {
+    stroke: pink;
+}

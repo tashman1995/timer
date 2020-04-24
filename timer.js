@@ -3,9 +3,10 @@ class Timer {
     this.durationInput = durationInput;
     this.startButton = startButton;
     this.pauseButton = pauseButton;
+
     if (callbacks) {
       this.onStart = callbacks.onStart;
-      this.change = callbacks.onChange;
+      this.onChange = callbacks.onChange;
       this.onTick = callbacks.onTick;
       this.onComplete = callbacks.onComplete;
     }
@@ -19,8 +20,12 @@ class Timer {
     if (this.onStart) {
       this.onStart(this.timeRemaining);
     }
+    const lineNum = 360;
+    this.step = this.timeRemaining / lineNum;
+    console.log(this.step)
     this.tick();
-    this.interval = setInterval(this.tick, 10);
+    
+    this.interval = setInterval(this.tick, 100);
   };
 
   pause = () => {
@@ -28,9 +33,7 @@ class Timer {
   };
 
   change =() => {
-      console.log('change')
       if (this.onChange) {
-        console.log('onchange')
         this.onChange(this.timeRemaining)
       }
   }
@@ -43,9 +46,9 @@ class Timer {
       }
     } else {
       // this.timeRemaining when we're assigning a value to it is get timeRemaining(), this.timeRemaining when were setting it to a vause is the same as set timeRemaining
-      this.timeRemaining = this.timeRemaining - .01;
+      this.timeRemaining = this.timeRemaining - .1;
       if (this.onTick) {
-        this.onTick(this.timeRemaining);
+        this.onTick(this.timeRemaining, this.step);
       }
     }
   };
