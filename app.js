@@ -1,46 +1,38 @@
-const durationInput = document.querySelector('#duration'),
-    startButton = document.querySelector('#start'),
-    pauseButton = document.querySelector('#pause'),
-    circle = document.querySelector('circle'),
-    lines = document.querySelectorAll('.line');
-    
+const durationInput = document.querySelector("#duration"),
+  startButton = document.querySelector("#start"),
+  pauseButton = document.querySelector("#pause"),
+  circle = document.querySelector("circle"),
+  lines = document.querySelectorAll(".line");
 
-const perimeter = circle.getAttribute('r') * 2 * Math.PI;
-circle.setAttribute('stroke-dasharray', perimeter)
+const perimeter = circle.getAttribute("r") * 2 * Math.PI;
+circle.setAttribute("stroke-dasharray", perimeter);
 
 let currentOffset = 0;
 let duration = durationInput.value;
-let step = 0
+let step = 0;
 
 const t1 = new Timer(durationInput, startButton, pauseButton, {
-    onChange(totalDuration) {
-        duration = totalDuration;
-        circle.setAttribute('stroke-dashoffset', 0);
-    },
-    onTick(timeRemaining,timePerLine) {
-        lineCounter(timeRemaining, timePerLine)
-        circle.setAttribute('stroke-dashoffset',
-        perimeter * timeRemaining / duration - perimeter);
-    }, 
-    onComplete() {
-        console.log('timer completed')
-    }
-})
+  onChange(totalDuration) {
+    duration = totalDuration;
+    circle.setAttribute("stroke-dashoffset", 0);
+  },
+  onTick(timeRemaining) {
+    lineCounter();
+    circle.setAttribute(
+      "stroke-dashoffset",
+      (perimeter * timeRemaining) / duration - perimeter
+    );
+  },
+  onComplete() {
+    console.log("timer completed");
+  },
+});
 
-const lineCounter = (timeRemaining, timePerLine) => {
-    console.log(timeRemaining, timePerLine, timeRemaining % timePerLine)
-    if((timeRemaining  timePerLine) <= 0.01){
-        step++
-        lines[step].style.stroke = 'red';
-    }
-    
-}
-
-
-
-
-
-
+const lineCounter = () => {
+    console.log(step)
+    lines[step].style.stroke = "red";
+    step++;
+};
 
 // GENERATING CIRCLE HTML
 // const dashedCircle = document.querySelector('.circle');
@@ -48,12 +40,12 @@ const lineCounter = (timeRemaining, timePerLine) => {
 // const linesNum = 360;
 // function populateCircle(){
 //     for(i = 0; i <= linesNum; i+=5){
-    
+
 //         const newGEl = document.createElement('g');
 //         const newLineEl = document.createElement('line');
 //         newGEl.setAttribute('style', 'stroke: orangered');
 //         newGEl.classList.add('line')
-//         newGEl.setAttribute('transform', `rotate(${i})`); 
+//         newGEl.setAttribute('transform', `rotate(${i})`);
 //         newLineEl.setAttribute('y1',"-60");
 //         newLineEl.setAttribute('y2',"-80");
 //         newGEl.appendChild(newLineEl)
@@ -62,4 +54,3 @@ const lineCounter = (timeRemaining, timePerLine) => {
 // }
 
 // populateCircle()
-
