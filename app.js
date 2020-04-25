@@ -1,13 +1,9 @@
 const durationInput = document.querySelector("#duration"),
   startButton = document.querySelector("#start"),
   pauseButton = document.querySelector("#pause"),
-  circle = document.querySelector("circle"),
   lines = document.querySelectorAll(".line");
 
-const perimeter = circle.getAttribute("r") * 2 * Math.PI;
-circle.setAttribute("stroke-dasharray", perimeter);
 
-let currentOffset = 0;
 let duration = durationInput.value;
 let numberOfLines = lines.length;
 let step = 0;
@@ -17,23 +13,18 @@ const t1 = new Timer(durationInput, startButton, pauseButton, {
     duration = totalDuration;
     circle.setAttribute("stroke-dashoffset", 0);
   },
-  onTick(timeRemaining) {
-    lineCounter();
-    circle.setAttribute(
-      "stroke-dashoffset",
-      (perimeter * timeRemaining) / duration - perimeter
-    );
+
+  onTick() {
+    lines[step].style.stroke = getColor(step);
+    step++;
+    console.log(step)
+   
   },
   onComplete() {
     console.log("timer completed");
   },
 });
 
-const lineCounter = () => {
-    lines[step].style.stroke = getColor(step);
-    step++;
-    console.log(step)
-};
 
 const getColor = (step) => {
     let r;
@@ -41,13 +32,17 @@ const getColor = (step) => {
     let b;
     let a = 1;
     if(step < numberOfLines/4){
-        r = 100;
-        g = 100;
+        r = 110;
+        g = 140;
         b = 255;
+    } else if(step >= numberOfLines/4 && step <= numberOfLines/4 * 2.5) {
+        r = 110 + (step - numberOfLines/4) * (255/(numberOfLines/2));
+        g = 140;
+        b = 255 - (step - numberOfLines/4) * (255/(numberOfLines/2));
     } else {
-        r = 0 + step * (255/numberOfLines);
-        g = 0;
-        b = 255 - step * (255/numberOfLines);
+        r =255;
+        g =140 - (step - numberOfLines/4 * 2.5) * (140/(numberOfLines * 0.375));
+        b = 0;
     }
     
     let newColor = `rgba(${r},${g},${b},${a})`;

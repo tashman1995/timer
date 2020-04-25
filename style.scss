@@ -34,14 +34,31 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    
+    align-items: center;
     margin: 0rem auto 8rem auto;
     padding: 3rem;
 
-    width: 118rem;
+    width: 80rem;
 
 }
 
 .line {
-    stroke: #fff;
+    stroke: rgba(255,255,255,.7);
+    stroke-width: .05rem;
 }
+
+#duration {
+    font-size: 5rem;
+    text-align: center;
+    color: #eee;
+    background-color: transparent;
+    border: none;
+
+    position: absolute;
+    top: 25rem;
+
+    &:focus {
+        outline: none;
+    }
+}
+
