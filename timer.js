@@ -21,7 +21,6 @@ class Timer {
       this.onStart(this.timeRemaining);
     }
     this.timerLength = this.timeRemaining;
-    let numberOfLines = 360/5;
     this.step = this.timerLength / numberOfLines;
     this.tick();
     this.interval = setInterval(this.tick, (this.step * 1000));

@@ -20,8 +20,8 @@ body {
   font-family: 'Open sans', sans-serif;
   font-weight: 400;
   line-height: 1.6;
-  background-image: -webkit-gradient(linear, left top, right bottom, from(#0d203d), to(#1a3d70));
-  background-image: linear-gradient(to right bottom, #0d203d, #1a3d70);
+  background-image: -webkit-gradient(linear, left top, right bottom, from(#0E1938), to(#22325E));
+  background-image: linear-gradient(to right bottom, #0E1938, #22325E);
   color: #fff;
   min-height: 100vh;
 }
@@ -41,6 +41,6 @@ body {
 }
 
 .line {
-  stroke: pink;
+  stroke: #fff;
 }
 /*# sourceMappingURL=style.css.map */

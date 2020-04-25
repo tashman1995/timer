@@ -9,6 +9,7 @@ circle.setAttribute("stroke-dasharray", perimeter);
 
 let currentOffset = 0;
 let duration = durationInput.value;
+let numberOfLines = lines.length;
 let step = 0;
 
 const t1 = new Timer(durationInput, startButton, pauseButton, {
@@ -29,10 +30,29 @@ const t1 = new Timer(durationInput, startButton, pauseButton, {
 });
 
 const lineCounter = () => {
-    console.log(step)
-    lines[step].style.stroke = "red";
+    lines[step].style.stroke = getColor(step);
     step++;
+    console.log(step)
 };
+
+const getColor = (step) => {
+    let r;
+    let g;
+    let b;
+    let a = 1;
+    if(step < numberOfLines/4){
+        r = 100;
+        g = 100;
+        b = 255;
+    } else {
+        r = 0 + step * (255/numberOfLines);
+        g = 0;
+        b = 255 - step * (255/numberOfLines);
+    }
+    
+    let newColor = `rgba(${r},${g},${b},${a})`;
+    return newColor;
+}
 
 // GENERATING CIRCLE HTML
 // const dashedCircle = document.querySelector('.circle');

@@ -1,5 +1,5 @@
-$bg-1: rgb(13, 32, 61);
-$bg-2: rgb(26, 61, 112);
+$bg-1: #0E1938;
+$bg-2: #22325E;
 
 * {
     margin: 0;
@@ -23,6 +23,7 @@ body {
     font-weight: 400;
     line-height: 1.6;
     background-image: linear-gradient(to right bottom, $bg-1, $bg-2);
+  
     color: #fff;
     min-height: 100vh;
   
@@ -42,5 +43,5 @@ body {
 }
 
 .line {
-    stroke: pink;
+    stroke: #fff;
 }
