@@ -1,11 +1,11 @@
 class Timer {
-  constructor(durationInput, startButton, pauseButton, callbacks) {
+  constructor(durationInput, startButton, pauseButton, lines, callbacks) {
     this.durationInput = durationInput;
     this.startButton = startButton;
     this.pauseButton = pauseButton;
+    this.numberOfLines = lines.length;
     this.step = durationInput.value / numberOfLines;
-    this.status = 'completed';
-
+    this.status = "completed";
 
     if (callbacks) {
       this.onStart = callbacks.onStart;
@@ -22,67 +22,66 @@ class Timer {
 
   start = () => {
     //Stop start doing anything if timer is already running
-    if(status != 'running'){
-      //Initial Tick and line step, interval waits for on increment before running
+    if (status != "running") {
+      //Check if the timer has completed or been changed and reset necessary elements
+      if (this.status === "completed") {
+        console.log("fresh start");
+        if (this.onStart) {
+          console.log("onstart run");
+          this.onStart();
+        }
+        this.step = this.timerRemaining / numberOfLines;
+        this.timerLength = this.timeRemaining;
+      }
+      //Initial Tick and line step, interval waits for one time increment before running
       this.tick();
       this.lineStep();
       //Set tick to run every .02 seconds
       this.interval = setInterval(this.tick, 20);
       // Set line colour change to happen every step amount of time
-      this.lineInterval = setInterval(this.lineStep, (this.step * 1000));
-  
-      if (this.onStart) {
-        this.onStart(this.timeRemaining);
-      }
-      
-      console.log('step' + this.step, 'number of line' + numberOfLines)
-      
-      
-      this.status = 'running'
-      if(this.status === 'completed'){
-        this.onStart()
-        this.step = this.timerLength / numberOfLines;
-      }
-  
+      this.lineInterval = setInterval(this.lineStep, this.step * 1000);
+
+      console.log("step" + this.step, "number of line" + numberOfLines);
+
+      this.status = "running";
     }
-    
-    
-   
   };
 
   pause = () => {
     clearInterval(this.interval);
     clearInterval(this.lineInterval);
-    this.status = 'paused';
+    this.status = "paused";
   };
 
-  change =() => {
+  change = () => {
     if (this.onChange) {
-    this.onChange(this.timeRemaining)
+      this.onChange(this.timeRemaining);
     }
-    // this.timerLength = this.timeRemaining;
-   
-  }
+  };
 
   tick = () => {
     if (this.timeRemaining <= 0) {
+      console.log('completed')
       this.pause();
-      this.status = "completed"
+      this.status = "completed";
       if (this.onComplete) {
         this.onComplete();
       }
     } else {
-      this.timeRemaining = this.timeRemaining - .02;
+      
     }
+    console.log('tick')
+      this.timeRemaining = this.timeRemaining - 0.02;
   };
 
   lineStep = () => {
     if (!(this.timeRemaining <= 0)) {
       this.lineStep();
-      } 
-  }
+    }
+  };
 
   get timeRemaining() {
+    console.log('duration input.value' + this.durationInput.value)
     return parseFloat(this.durationInput.value);
   }
 

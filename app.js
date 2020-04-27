@@ -3,51 +3,57 @@ const durationInput = document.querySelector("#duration"),
   pauseButton = document.querySelector("#pause"),
   lines = document.querySelectorAll(".line");
 
-
 let duration = durationInput.value;
-let numberOfLines = lines.length;
+let numberOfLines = lines.length - 1;
 let step = 0;
 
 const t1 = new Timer(durationInput, startButton, pauseButton, {
-  onChange(totalDuration) {
-    duration = totalDuration;
-    circle.setAttribute("stroke-dashoffset", 0);
+  onStart() {
+    clearLines();
   },
 
-  onTick() {
+  onChange(totalDuration) {
+    duration = totalDuration;
+    clearLines();
+  },
+  onComplete() {},
+  lineStep() {
     lines[step].style.stroke = getColor(step);
     step++;
-    console.log(step)
-   
-  },
-  onComplete() {
-    console.log("timer completed");
+    console.log(step);
   },
 });
 
+const clearLines = () => {
+  for (line of lines) {
+    line.style.stroke = "rgba(255,255,255,.7)";
+  }
+};
 
 const getColor = (step) => {
-    let r;
-    let g;
-    let b;
-    let a = 1;
-    if(step < numberOfLines/4){
-        r = 110;
-        g = 140;
-        b = 255;
-    } else if(step >= numberOfLines/4 && step <= numberOfLines/4 * 2.5) {
-        r = 110 + (step - numberOfLines/4) * (255/(numberOfLines/2));
-        g = 140;
-        b = 255 - (step - numberOfLines/4) * (255/(numberOfLines/2));
-    } else {
-        r =255;
-        g =140 - (step - numberOfLines/4 * 2.5) * (140/(numberOfLines * 0.375));
-        b = 0;
-    }
-    
-    let newColor = `rgba(${r},${g},${b},${a})`;
-    return newColor;
-}
+  let r;
+  let g;
+  let b;
+  let a = 1;
+  if (step < numberOfLines / 4) {
+    r = 110;
+    g = 140;
+    b = 255;
+  } else if (step >= numberOfLines / 4 && step <= (numberOfLines / 4) * 2.5) {
+    r = 110 + (step - numberOfLines / 4) * (255 / (numberOfLines / 2));
+    g = 140;
+    b = 255 - (step - numberOfLines / 4) * (255 / (numberOfLines / 2));
+  } else {
+    r = 255;
+    g =
+      140 -
+      (step - (numberOfLines / 4) * 2.5) * (140 / (numberOfLines * 0.375));
+    b = 0;
+  }
+
+  let newColor = `rgba(${r},${g},${b},${a})`;
+  return newColor;
+};
 
 // GENERATING CIRCLE HTML
 // const dashedCircle = document.querySelector('.circle');
