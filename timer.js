@@ -1,22 +1,32 @@
 class Timer {
-  constructor(durationInput, startButton, pauseButton, callbacks) {
+  constructor(durationInput, startButton, pauseButton, button, callbacks) {
     this.durationInput = durationInput;
     this.startButton = startButton;
     this.pauseButton = pauseButton;
+    this.button = button;
     this.status = "completed";
 
     if (callbacks) {
       this.onStart = callbacks.onStart;
       this.onChange = callbacks.onChange;
-      this.onTick = callbacks.onTick;
+      this.onPause = callbacks.onPause;
       this.onComplete = callbacks.onComplete;
       this.lineStep = callbacks.lineStep;
     }
 
     this.startButton.addEventListener("click", this.start);
     this.pauseButton.addEventListener("click", this.pause);
+    this.button.addEventListener("click", this.checkStatus);
     this.durationInput.addEventListener("input", this.change);
     this.durationInput.addEventListener("focus", this.pause);
+  }
+
+  checkStatus = () => {
+    if(this.status === "completed" || this.status === "paused"){
+      this.start()
+    } else if(this.status === "running"){
+      this.pause();
+    }
   }
 
   start = () => {
@@ -34,9 +44,6 @@ class Timer {
       this.interval = setInterval(this.tick, 20);
       // Set line colour change to happen every step amount of time
       this.lineInterval = setInterval(this.lineStep, this.step * 1000);
-
-      console.log("step" + this.step, "number of line" + numberOfLines);
-
       
       this.status = "running";
     }
@@ -46,6 +53,7 @@ class Timer {
     clearInterval(this.interval);
     clearInterval(this.lineInterval);
     this.status = "paused";
+    this.onPause()
   };
 
   change = () => {

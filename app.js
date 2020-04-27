@@ -8,18 +8,23 @@ let duration = durationInput.value;
 let numberOfLines = lines.length -1;
 let step;
 
-const t1 = new Timer(durationInput, startButton, pauseButton, button {
+const t1 = new Timer(durationInput, startButton, pauseButton, button, {
   onStart() {
     clearLines();
     step = 0;
-    console.log('increment' + step)
+    button.innerText = 'Pause'
+  },
+  onPause(){
+    button.innerText = 'Start'
   },
 
   onChange(totalDuration) {
     duration = totalDuration;
     clearLines();
   },
-  onComplete() {},
+  onComplete() {
+    button.innerText = 'Again?'
+  },
   lineStep() {
     lines[step].style.stroke = getColor(step);
     step++;
