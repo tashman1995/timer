@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@600&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +18,7 @@ html {
 }
 
 body {
-  font-family: 'Open sans', sans-serif;
+  font-family: 'Baloo Paaji 2', cursive;
   font-weight: 400;
   line-height: 1.6;
   background-image: -webkit-gradient(linear, left top, right bottom, from(#0E1938), to(#22325E));
@@ -60,5 +61,20 @@ body {
 
 #duration:focus {
   outline: none;
+}
+
+#button {
+  cursor: pointer;
+  background-color: #ff7300;
+  text-transform: uppercase;
+  color: #eee;
+  font-size: 1.8rem;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+  position: absolute;
+  top: 39rem;
 }
 /*# sourceMappingURL=style.css.map */
