@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@600&family=Roboto+Mono&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -52,11 +52,13 @@ body {
 #duration {
   font-size: 5rem;
   text-align: center;
+  font-family: 'Roboto Mono', monospace;
   color: #eee;
   background-color: transparent;
   border: none;
   position: absolute;
-  top: 25rem;
+  top: 24rem;
+  letter-spacing: -.1rem;
 }
 
 #duration:focus {

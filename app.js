@@ -12,7 +12,6 @@ const t1 = new Timer(durationInput, startButton, pauseButton, button, {
   onStart() {
     clearLines();
     step = 0;
-    button.innerText = 'Pause'
   },
   onPause(){
     button.innerText = 'Start'
@@ -24,6 +23,9 @@ const t1 = new Timer(durationInput, startButton, pauseButton, button, {
   },
   onComplete() {
     button.innerText = 'Again?'
+  },
+  updateText(message){
+    button.innerText = message;
   },
   lineStep() {
     lines[step].style.stroke = getColor(step);
