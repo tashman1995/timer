@@ -1,8 +1,6 @@
 class Timer {
-  constructor(durationInput, startButton, pauseButton, button, callbacks) {
+  constructor(durationInput, button, callbacks) {
     this.durationInput = durationInput;
-    this.startButton = startButton;
-    this.pauseButton = pauseButton;
     this.button = button;
     this.status = "new";
     this.previousTime = this.timeRemaining;
@@ -11,13 +9,13 @@ class Timer {
       this.onStart = callbacks.onStart;
       this.onChange = callbacks.onChange;
       this.onPause = callbacks.onPause;
+      this.onTick = callbacks.onTick;
       this.updateText = callbacks.updateText;
       this.onComplete = callbacks.onComplete;
       this.lineStep = callbacks.lineStep;
+      this.innerLineStep = callbacks.innerLineStep;
     }
 
-    this.startButton.addEventListener("click", this.start);
-    this.pauseButton.addEventListener("click", this.pause);
     this.button.addEventListener("click", this.checkStatus);
     this.durationInput.addEventListener("input", this.change);
     this.durationInput.addEventListener("focus", this.pause);
@@ -41,8 +39,10 @@ class Timer {
     this.updateText("Pause");
     this.tick();
     this.lineStep();
+    this.innerLineStep();
     this.interval = setInterval(this.tick, 10);
     this.lineInterval = setInterval(this.lineStep, this.step * 1000);
+    this.innerLineInterval = setInterval(this.innerLineStep, 1000);
 
     this.status = "running";
   };
@@ -50,7 +50,11 @@ class Timer {
   pause = () => {
     clearInterval(this.interval);
     clearInterval(this.lineInterval);
-    this.status = "paused";
+    clearInterval(this.innerLineInterval);
+    if(this.status != "new"){
+      this.status = "paused";
+    }
+
     this.updateText("Start");
   };
 
@@ -77,6 +81,11 @@ class Timer {
   lineStep = () => {
     if (!(this.timeRemaining <= 0)) {
       this.lineStep();
+    }
+  };
+  innerLineStep = () => {
+    if (!(this.timeRemaining <= 0)) {
+      this.innerLineStep();
     }
   };
 

@@ -45,9 +45,14 @@ body {
 
 }
 
-.line {
+.line, .line2 {
     stroke: rgba(255,255,255,.7);
     stroke-width: .05rem;
+    transition: all .1s;
+}
+
+.line2 {
+    opacity: 0;
 }
 
 #duration {
@@ -65,6 +70,12 @@ body {
     &:focus {
         outline: none;
     }
+
+    z-index: 1000;
+}
+
+#svg2 {
+    position: absolute;
 }
 
 #button {

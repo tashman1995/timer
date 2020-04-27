@@ -1,22 +1,42 @@
 const durationInput = document.querySelector("#duration"),
-  startButton = document.querySelector("#start"),
-  pauseButton = document.querySelector("#pause"),
   button = document.querySelector("#button"),
-  lines = document.querySelectorAll(".line");
+  lines = document.querySelectorAll(".line"),
+  innerLines = document.querySelectorAll('.line2');
 
 let duration = durationInput.value;
-let numberOfLines = lines.length -1;
-let step;
+let numberOfLines = lines.length - 1;
+let step = 0;
+let innerStep = 0;
 
-const t1 = new Timer(durationInput, startButton, pauseButton, button, {
+const t1 = new Timer(durationInput, button, {
   onStart() {
     clearLines();
     step = 0;
+    innerStep = 0;
   },
   onPause(){
     button.innerText = 'Start'
   },
-
+  innerLineStep(){
+   
+    for (let i=0; i<innerLines.length; i++) {
+      setTimeout( function timer(){
+          innerLines[i].style.opacity = "100%";
+          innerLines[i].style.stroke = getColor(i);
+      }, i*(500 / numberOfLines));
+    }
+    
+      setTimeout(() => {
+          for (let i=0; i<innerLines.length; i++) {
+            setTimeout( function timer(){
+                innerLines[i].style.opacity = "0%";
+            }, i*(500 / numberOfLines));
+          }
+      }, 500);
+    
+   
+    // let innerInterval = setInterval(1000 / numberOfLines, fillInnerLines)
+  },
   onChange(totalDuration) {
     duration = totalDuration;
     clearLines();
@@ -29,9 +49,17 @@ const t1 = new Timer(durationInput, startButton, pauseButton, button, {
   },
   lineStep() {
     lines[step].style.stroke = getColor(step);
+    let currentLine = lines[step].firstChild;
     step++;
   },
 });
+
+const fillInnerLines = () => {
+  innerStep++;
+  console.log("innerstap")
+  innerLines[innerStep].style.opacity = "100%";
+  clearInterval(innerInterval)
+}
 
 const clearLines = () => {
   for (line of lines) {
@@ -63,6 +91,11 @@ const getColor = (step) => {
   let newColor = `rgba(${r},${g},${b},${a})`;
   return newColor;
 };
+
+function timer (){
+  
+}
+
 
 // GENERATING CIRCLE HTML
 // const dashedCircle = document.querySelector('.circle');
