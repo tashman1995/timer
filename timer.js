@@ -33,13 +33,12 @@ class Timer {
   start = () => {
     if (this.status === "new") {
       this.onStart();
-      this.step = this.durationInput.value / numberOfLines;
+      this.step = (this.durationInput.value / numberOfLines);
+      console.log('step' + this.step)
     }
     this.updateText("Pause");
-    this.tick();
-    this.lineStep();
     this.interval = setInterval(this.tick, 10);
-    this.lineInterval = setInterval(this.lineStep, this.step * 1000);
+    // this.lineInterval = setInterval(this.lineStep, this.step * 1000);
     this.status = "running";
   };
 
@@ -60,25 +59,29 @@ class Timer {
     }
     this.status = "new";
     this.previousTime = this.timeRemaining;
+
   };
 
   tick = () => {
     if (this.timeRemaining <= 0) {
+      this.lineStep();
       this.pause();
       this.status = "completed";
       if (this.updateText) {
         this.updateText("Again?");
       }
     } else {
+      this.previousTick = this.timeRemaining;
       this.timeRemaining = this.timeRemaining - 0.01;
+    
+    if((this.timeRemaining % this.step) > (this.previousTick % this.step)){
+      console.log('match' + this.timeRemaining)
+      this.lineStep()
+    }
+ 
     }
   };
 
-  lineStep = () => {
-    if (!(this.timeRemaining <= 0)) {
-      this.lineStep();
-    }
-  };
 
 
   restart = () => {

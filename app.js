@@ -5,13 +5,12 @@ const durationInput = document.querySelector("#duration"),
 let duration = durationInput.value;
 let numberOfLines = lines.length - 1;
 let step = 0;
-let innerStep = 0;
+
 
 const t1 = new Timer(durationInput, button, {
   onStart() {
     clearLines();
     step = 0;
-    innerStep = 0;
   },
 
   onPause(){
@@ -34,30 +33,21 @@ const t1 = new Timer(durationInput, button, {
   lineStep() {
     lines[step].style.stroke = getColor(step);
     let currentLine = lines[step].firstElementChild;
-    
-    console.log(currentLine.getAttribute.y2)
     currentLine.setAttribute('y2', "-55");
     if(step - 1 >= 0){
       let previousLine = lines[step - 1].firstElementChild;
       previousLine.setAttribute('y2', "-50");
     }
 
-    console.log(currentLine)
     step++;
   }
 
 });
 
-const fillInnerLines = () => {
-  innerStep++;
-  console.log("innerstap")
-  innerLines[innerStep].style.opacity = "100%";
-  clearInterval(innerInterval)
-}
-
 const clearLines = () => {
   for (line of lines) {
     line.style.stroke = "rgba(255,255,255,.7)";
+    line.firstElementChild.setAttribute('y2', "-50");
   }
 };
 
