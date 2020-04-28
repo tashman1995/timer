@@ -25,7 +25,7 @@ class Timer {
       this.start();
     } else if (this.status === "running") {
       this.pause();
-    } else if (this.status === "completed"){
+    } else if (this.status === "completed") {
       this.restart();
     }
   };
@@ -33,8 +33,7 @@ class Timer {
   start = () => {
     if (this.status === "new") {
       this.onStart();
-      this.step = (this.durationInput.value / numberOfLines);
-      console.log('step' + this.step)
+      this.step = this.durationInput.value / numberOfLines;
     }
     this.updateText("Pause");
     this.interval = setInterval(this.tick, 10);
@@ -46,7 +45,7 @@ class Timer {
     clearInterval(this.interval);
     clearInterval(this.lineInterval);
 
-    if(this.status != "new"){
+    if (this.status != "new") {
       this.status = "paused";
     }
 
@@ -59,7 +58,6 @@ class Timer {
     }
     this.status = "new";
     this.previousTime = this.timeRemaining;
-
   };
 
   tick = () => {
@@ -73,23 +71,19 @@ class Timer {
     } else {
       this.previousTick = this.timeRemaining;
       this.timeRemaining = this.timeRemaining - 0.01;
-    
-    if((this.timeRemaining % this.step) > (this.previousTick % this.step)){
-      console.log('match' + this.timeRemaining)
-      this.lineStep()
-    }
- 
+
+      if (this.timeRemaining % this.step > this.previousTick % this.step) {
+        this.lineStep();
+      }
     }
   };
-
-
 
   restart = () => {
     this.timeRemaining = this.previousTime;
     this.updateText("Start");
     this.onChange();
-    this.status = "new"
-  }
+    this.status = "new";
+  };
 
   get timeRemaining() {
     return parseFloat(this.durationInput.value);
@@ -97,6 +91,5 @@ class Timer {
 
   set timeRemaining(time) {
     this.durationInput.value = time.toFixed(2);
-    
   }
 }

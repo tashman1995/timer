@@ -18,13 +18,18 @@ html {
 }
 
 body {
-  font-family: 'Baloo Paaji 2', cursive;
+  font-family: "Baloo Paaji 2", cursive;
   font-weight: 400;
   line-height: 1.6;
-  background-image: -webkit-gradient(linear, left top, right bottom, from(#0E1938), to(#22325E));
-  background-image: linear-gradient(to right bottom, #0E1938, #22325E);
+  background-color: rgba(218, 226, 255, 0.6);
   color: #fff;
   min-height: 100vh;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 7rem;
+  line-height: 1;
 }
 
 .container {
@@ -39,16 +44,24 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 0rem auto 8rem auto;
-  padding: 3rem;
-  width: 80rem;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  margin: 4rem auto 8rem auto;
+  padding: 7rem 3rem;
+  background-image: -webkit-gradient(linear, left top, right bottom, from(#060c2f), to(#050924));
+  background-image: linear-gradient(to right bottom, #060c2f, #050924);
+  -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.4);
+          box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.4);
+  width: 40rem;
+  height: 70rem;
 }
 
-.line, .line2 {
-  stroke: rgba(255, 255, 255, 0.7);
-  stroke-width: .05rem;
-  -webkit-transition: all .1s;
-  transition: all .1s;
+.line,
+.line2 {
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 0.05rem;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
 }
 
 .line2 {
@@ -58,13 +71,13 @@ body {
 #duration {
   font-size: 5rem;
   text-align: center;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   color: #eee;
   background-color: transparent;
   border: none;
   position: absolute;
-  top: 24rem;
-  letter-spacing: -.1rem;
+  top: 32rem;
+  letter-spacing: -0.1rem;
   z-index: 1000;
 }
 
@@ -72,8 +85,9 @@ body {
   outline: none;
 }
 
-#svg2 {
+#svg {
   position: absolute;
+  top: 11rem;
 }
 
 #button {
@@ -88,6 +102,6 @@ body {
   outline: none;
   border: none;
   position: absolute;
-  top: 39rem;
+  top: 47rem;
 }
 /*# sourceMappingURL=style.css.map */

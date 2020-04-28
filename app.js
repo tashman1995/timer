@@ -6,15 +6,14 @@ let duration = durationInput.value;
 let numberOfLines = lines.length - 1;
 let step = 0;
 
-
 const t1 = new Timer(durationInput, button, {
   onStart() {
     clearLines();
     step = 0;
   },
 
-  onPause(){
-    button.innerText = 'Start'
+  onPause() {
+    button.innerText = "Start";
   },
 
   onChange(totalDuration) {
@@ -23,31 +22,30 @@ const t1 = new Timer(durationInput, button, {
   },
 
   onComplete() {
-    button.innerText = 'Again?'
+    button.innerText = "Again?";
   },
 
-  updateText(message){
+  updateText(message) {
     button.innerText = message;
   },
 
   lineStep() {
     lines[step].style.stroke = getColor(step);
     let currentLine = lines[step].firstElementChild;
-    currentLine.setAttribute('y2', "-55");
-    if(step - 1 >= 0){
+    currentLine.setAttribute("y2", "-53");
+    if (step - 1 >= 0) {
       let previousLine = lines[step - 1].firstElementChild;
-      previousLine.setAttribute('y2', "-50");
+      previousLine.setAttribute("y2", "-48");
     }
 
     step++;
-  }
-
+  },
 });
 
 const clearLines = () => {
   for (line of lines) {
     line.style.stroke = "rgba(255,255,255,.7)";
-    line.firstElementChild.setAttribute('y2', "-50");
+    line.firstElementChild.setAttribute("y2", "-48");
   }
 };
 
@@ -75,11 +73,6 @@ const getColor = (step) => {
   let newColor = `rgba(${r},${g},${b},${a})`;
   return newColor;
 };
-
-function timer (){
-  
-}
-
 
 // GENERATING CIRCLE HTML
 // const dashedCircle = document.querySelector('.circle');
