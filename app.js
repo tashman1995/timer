@@ -49,7 +49,16 @@ const t1 = new Timer(durationInput, button, {
   },
   lineStep() {
     lines[step].style.stroke = getColor(step);
-    let currentLine = lines[step].firstChild;
+    let currentLine = lines[step].firstElementChild;
+    
+    console.log(currentLine.getAttribute.y2)
+    currentLine.setAttribute('y2', "-55");
+    if(step - 1 >= 0){
+      let previousLine = lines[step - 1].firstElementChild;
+      previousLine.setAttribute('y2', "-50");
+    }
+
+    console.log(currentLine)
     step++;
   },
 });
