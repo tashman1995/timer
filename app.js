@@ -1,7 +1,6 @@
 const durationInput = document.querySelector("#duration"),
   button = document.querySelector("#button"),
-  lines = document.querySelectorAll(".line"),
-  innerLines = document.querySelectorAll('.line2');
+  lines = document.querySelectorAll(".line");
 
 let duration = durationInput.value;
 let numberOfLines = lines.length - 1;
@@ -14,39 +13,24 @@ const t1 = new Timer(durationInput, button, {
     step = 0;
     innerStep = 0;
   },
+
   onPause(){
     button.innerText = 'Start'
   },
-  innerLineStep(){
-   
-    for (let i=0; i<innerLines.length; i++) {
-      setTimeout( function timer(){
-          innerLines[i].style.opacity = "100%";
-          innerLines[i].style.stroke = getColor(i);
-      }, i*(500 / numberOfLines));
-    }
-    
-      setTimeout(() => {
-          for (let i=0; i<innerLines.length; i++) {
-            setTimeout( function timer(){
-                innerLines[i].style.opacity = "0%";
-            }, i*(500 / numberOfLines));
-          }
-      }, 500);
-    
-   
-    // let innerInterval = setInterval(1000 / numberOfLines, fillInnerLines)
-  },
+
   onChange(totalDuration) {
     duration = totalDuration;
     clearLines();
   },
+
   onComplete() {
     button.innerText = 'Again?'
   },
+
   updateText(message){
     button.innerText = message;
   },
+
   lineStep() {
     lines[step].style.stroke = getColor(step);
     let currentLine = lines[step].firstElementChild;
@@ -60,7 +44,8 @@ const t1 = new Timer(durationInput, button, {
 
     console.log(currentLine)
     step++;
-  },
+  }
+
 });
 
 const fillInnerLines = () => {

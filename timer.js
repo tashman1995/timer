@@ -13,7 +13,6 @@ class Timer {
       this.updateText = callbacks.updateText;
       this.onComplete = callbacks.onComplete;
       this.lineStep = callbacks.lineStep;
-      this.innerLineStep = callbacks.innerLineStep;
     }
 
     this.button.addEventListener("click", this.checkStatus);
@@ -39,18 +38,15 @@ class Timer {
     this.updateText("Pause");
     this.tick();
     this.lineStep();
-    this.innerLineStep();
     this.interval = setInterval(this.tick, 10);
     this.lineInterval = setInterval(this.lineStep, this.step * 1000);
-    this.innerLineInterval = setInterval(this.innerLineStep, 1000);
-
     this.status = "running";
   };
 
   pause = () => {
     clearInterval(this.interval);
     clearInterval(this.lineInterval);
-    clearInterval(this.innerLineInterval);
+
     if(this.status != "new"){
       this.status = "paused";
     }
@@ -83,11 +79,7 @@ class Timer {
       this.lineStep();
     }
   };
-  innerLineStep = () => {
-    if (!(this.timeRemaining <= 0)) {
-      this.innerLineStep();
-    }
-  };
+
 
   restart = () => {
     this.timeRemaining = this.previousTime;
